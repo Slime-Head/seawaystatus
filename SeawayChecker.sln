@@ -1,0 +1,43 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.27703.2026
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SeawayChecker", "SeawayChecker\SeawayChecker.csproj", "{A49D48F3-768E-4EE0-8F7B-BDCC45D82790}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|ARM = Debug|ARM
+		Debug|x64 = Debug|x64
+		Debug|x86 = Debug|x86
+		Release|ARM = Release|ARM
+		Release|x64 = Release|x64
+		Release|x86 = Release|x86
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{A49D48F3-768E-4EE0-8F7B-BDCC45D82790}.Debug|ARM.ActiveCfg = Debug|ARM
+		{A49D48F3-768E-4EE0-8F7B-BDCC45D82790}.Debug|ARM.Build.0 = Debug|ARM
+		{A49D48F3-768E-4EE0-8F7B-BDCC45D82790}.Debug|ARM.Deploy.0 = Debug|ARM
+		{A49D48F3-768E-4EE0-8F7B-BDCC45D82790}.Debug|x64.ActiveCfg = Debug|x64
+		{A49D48F3-768E-4EE0-8F7B-BDCC45D82790}.Debug|x64.Build.0 = Debug|x64
+		{A49D48F3-768E-4EE0-8F7B-BDCC45D82790}.Debug|x64.Deploy.0 = Debug|x64
+		{A49D48F3-768E-4EE0-8F7B-BDCC45D82790}.Debug|x86.ActiveCfg = Debug|x86
+		{A49D48F3-768E-4EE0-8F7B-BDCC45D82790}.Debug|x86.Build.0 = Debug|x86
+		{A49D48F3-768E-4EE0-8F7B-BDCC45D82790}.Debug|x86.Deploy.0 = Debug|x86
+		{A49D48F3-768E-4EE0-8F7B-BDCC45D82790}.Release|ARM.ActiveCfg = Release|ARM
+		{A49D48F3-768E-4EE0-8F7B-BDCC45D82790}.Release|ARM.Build.0 = Release|ARM
+		{A49D48F3-768E-4EE0-8F7B-BDCC45D82790}.Release|ARM.Deploy.0 = Release|ARM
+		{A49D48F3-768E-4EE0-8F7B-BDCC45D82790}.Release|x64.ActiveCfg = Release|x64
+		{A49D48F3-768E-4EE0-8F7B-BDCC45D82790}.Release|x64.Build.0 = Release|x64
+		{A49D48F3-768E-4EE0-8F7B-BDCC45D82790}.Release|x64.Deploy.0 = Release|x64
+		{A49D48F3-768E-4EE0-8F7B-BDCC45D82790}.Release|x86.ActiveCfg = Release|x86
+		{A49D48F3-768E-4EE0-8F7B-BDCC45D82790}.Release|x86.Build.0 = Release|x86
+		{A49D48F3-768E-4EE0-8F7B-BDCC45D82790}.Release|x86.Deploy.0 = Release|x86
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {535AEF0E-2150-4655-94DF-5E8E6B83F7D9}
+	EndGlobalSection
+EndGlobal
