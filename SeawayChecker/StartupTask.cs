@@ -32,7 +32,7 @@ namespace SeawayChecker
             deferral = taskInstance.GetDeferral();
             InitGPIO();
             GetStatus(null);
-            timer = ThreadPoolTimer.CreatePeriodicTimer(GetStatus, TimeSpan.FromMinutes(10));
+            timer = ThreadPoolTimer.CreatePeriodicTimer(GetStatus, TimeSpan.FromMinutes(1));
         }
 
         private void InitGPIO()
