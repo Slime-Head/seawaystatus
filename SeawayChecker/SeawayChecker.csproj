@@ -102,6 +102,7 @@
     <AppxManifest Include="Package.appxmanifest">
       <SubType>Designer</SubType>
     </AppxManifest>
+    <None Include="project.json" />
     <None Include="SeawayChecker_TemporaryKey.pfx" />
   </ItemGroup>
   <ItemGroup>
@@ -129,6 +130,9 @@
     </Content>
   </ItemGroup>
   <ItemGroup>
+    <PackageReference Include="HtmlAgilityPack">
+      <Version>1.8.4</Version>
+    </PackageReference>
     <PackageReference Include="Microsoft.NETCore.UniversalWindowsPlatform">
       <Version>6.1.5</Version>
     </PackageReference>
