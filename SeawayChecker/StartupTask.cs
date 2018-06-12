@@ -16,9 +16,8 @@ namespace SeawayChecker
     public sealed class StartupTask : IBackgroundTask
     {
         BackgroundTaskDeferral deferral;
-        private GpioPinValue value = GpioPinValue.High;
         private const int GREEN_LED_PIN = 3;
-        private const int RED_LED_PIN = 5;
+        private const int RED_LED_PIN = 6;
         private GpioPin greenPin;
         private GpioPin redPin;
         private ThreadPoolTimer timer;
@@ -28,7 +27,7 @@ namespace SeawayChecker
         {
             deferral = taskInstance.GetDeferral();
             InitGPIO();
-
+            GetStatus(null);
             timer = ThreadPoolTimer.CreatePeriodicTimer(GetStatus, TimeSpan.FromMinutes(10));
         }
 
@@ -39,7 +38,7 @@ namespace SeawayChecker
             greenPin.SetDriveMode(GpioPinDriveMode.Output);
 
             redPin = GpioController.GetDefault().OpenPin(RED_LED_PIN);
-            redPin.Write(GpioPinValue.Low);
+            redPin.Write(GpioPinValue.High);
             redPin.SetDriveMode(GpioPinDriveMode.Output);
         }
 
@@ -47,12 +46,13 @@ namespace SeawayChecker
         {
             HttpClient client = new HttpClient();
             string url = "http://www.greatlakes-seaway.com/R2/jsp/mMaiBrdgStatus.jsp?language=E";
-            HttpResponseMessage response = await client.GetAsync(url);
-            string html = response.Content.ToString();
+            string html = await client.GetStringAsync(url);
+            html = html.Substring(622);
             var htmlDoc = new HtmlAgilityPack.HtmlDocument();
             htmlDoc.LoadHtml(html);
             var htmlNode = htmlDoc.DocumentNode.SelectSingleNode("/html/body/div/div[2]/ul/li[2]/span[3]/font");
-            if (htmlNode.InnerText.Trim() == "Available")
+            string availability = htmlNode.InnerText.Trim();
+            if (availability == "Available")
                 isOpened = true;
             else
                 isOpened = false;
@@ -63,13 +63,13 @@ namespace SeawayChecker
         {
             if (isOpened)
             {
-                greenPin.Write(GpioPinValue.High);
-                redPin.Write(GpioPinValue.Low);
+                greenPin.Write(GpioPinValue.Low);
+                redPin.Write(GpioPinValue.High);
             }
             else
             {
-                redPin.Write(GpioPinValue.High);
-                greenPin.Write(GpioPinValue.Low);
+                redPin.Write(GpioPinValue.Low);
+                greenPin.Write(GpioPinValue.High);
             }
                 
         }
