@@ -16,12 +16,16 @@ namespace SeawayChecker
     public sealed class StartupTask : IBackgroundTask
     {
         BackgroundTaskDeferral deferral;
+
         private const int GREEN_LED_PIN = 3;
         private const int RED_LED_PIN = 6;
         private GpioPin greenPin;
         private GpioPin redPin;
+
         private ThreadPoolTimer timer;
-        private bool isOpened;
+
+        private const string url = "http://www.greatlakes-seaway.com/R2/jsp/mMaiBrdgStatus.jsp?language=E";
+        private bool isOpen;
 
         public void Run(IBackgroundTaskInstance taskInstance)
         {
@@ -34,44 +38,45 @@ namespace SeawayChecker
         private void InitGPIO()
         {
             greenPin = GpioController.GetDefault().OpenPin(GREEN_LED_PIN);
-            greenPin.Write(GpioPinValue.High);
+            greenPin.Write(GpioPinValue.High); // OFF
             greenPin.SetDriveMode(GpioPinDriveMode.Output);
 
             redPin = GpioController.GetDefault().OpenPin(RED_LED_PIN);
-            redPin.Write(GpioPinValue.High);
+            redPin.Write(GpioPinValue.High); // OFF
             redPin.SetDriveMode(GpioPinDriveMode.Output);
         }
 
         private async void GetStatus(ThreadPoolTimer timer)
         {
             HttpClient client = new HttpClient();
-            string url = "http://www.greatlakes-seaway.com/R2/jsp/mMaiBrdgStatus.jsp?language=E";
             string html = await client.GetStringAsync(url);
-            html = html.Substring(622);
+            html = html.Substring(622); // Remove text before start of html node
+
             var htmlDoc = new HtmlAgilityPack.HtmlDocument();
             htmlDoc.LoadHtml(html);
             var htmlNode = htmlDoc.DocumentNode.SelectSingleNode("/html/body/div/div[2]/ul/li[2]/span[3]/font");
             string availability = htmlNode.InnerText.Trim();
+
             if (availability == "Available")
-                isOpened = true;
+                isOpen = true;
             else
-                isOpened = false;
+                isOpen = false;
+
             UpdateLEDs();
         }
 
         private void UpdateLEDs()
         {
-            if (isOpened)
+            if (isOpen)
             {
-                greenPin.Write(GpioPinValue.Low);
-                redPin.Write(GpioPinValue.High);
+                greenPin.Write(GpioPinValue.Low); // Green ON
+                redPin.Write(GpioPinValue.High); // Red OFF
             }
             else
             {
-                redPin.Write(GpioPinValue.Low);
-                greenPin.Write(GpioPinValue.High);
-            }
-                
+                redPin.Write(GpioPinValue.Low); // Green ON
+                greenPin.Write(GpioPinValue.High); // Red OFF
+            }   
         }
     }
 }
