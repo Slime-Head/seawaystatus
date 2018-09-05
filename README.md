@@ -1,4 +1,4 @@
-# SeawayStatus
+# SeawayChecker
 Windows IoT Core background app for checking the status of the Saint-Lambert seaway bike bridge. When the bridge is available, a green LED turns on. When it is not available, a red LED turns on. The status of the bridge comes from the Great Lakes St. Lawrence Seaway System's website (http://www.greatlakes-seaway.com) and is for informational purposes only.
 
 Hardware:
